@@ -105,9 +105,23 @@ func (sl *SingleLinkedList) AddAfter(key, element int) error{
 // @params key - value of node that we will insert in-front of
 // @params element - value of new node to be appended
 func (sl *SingleLinkedList) AddBefore(key, element int) error{
+	if sl.Head == nil {
+		return errors.New("key value not in list")
+	}
+
 	curr := sl.Head
 	prev := sl.Head
-	for curr != nil || curr.Value != key {
+	if sl.Head.Value == key {
+		node := &nodeSingle{
+			Next: curr,
+			Value: element,
+		}
+		sl.Head = node
+		sl.size++
+		return nil
+	}
+
+	for curr != nil && curr.Value != key {
 		prev = curr
 		curr = curr.Next
 	}
@@ -120,6 +134,7 @@ func (sl *SingleLinkedList) AddBefore(key, element int) error{
 		Next: curr,
 		Value: element,
 	}
+	
 	prev.Next = node
 	sl.size ++
 	return nil
@@ -139,8 +154,7 @@ func (sl *SingleLinkedList) Delete(key int) error{
 
 	prev := sl.Head
 	curr := sl.Head.Next
-
-	for curr != nil && curr.Value == key {
+	for curr != nil && curr.Value != key {
 		curr = curr.Next
 		prev = curr
 	}
@@ -164,7 +178,7 @@ func (sl *SingleLinkedList) Exists(key int) bool {
 	return curr != nil
 }
 
-// Iterator returns an iterable object
+// Iterator returns an iterrable object
 func (sl *SingleLinkedList) Iterator() *ListIterator {
 	return &ListIterator{cursor:sl.Head}
 }
