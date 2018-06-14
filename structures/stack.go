@@ -13,13 +13,13 @@ func InitStack() *stack {
 	return &stack{make([]int, 0)}
 }
 
-func (s *stack) Pop() (int, error){
+func (s *stack) Pop() (int, error) {
 	if len(s.s) == 0 {
 		return 0, errors.New("stack is empty")
 	}
 
 	var element int
-	element, s.s = s.s[len(s.s) -1], s.s[:len(s.s) - 1]
+	element, s.s = s.s[len(s.s)-1], s.s[:len(s.s)-1]
 	return element, nil
 }
 

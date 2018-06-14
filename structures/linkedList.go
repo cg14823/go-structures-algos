@@ -4,9 +4,8 @@ import (
 	"errors"
 )
 
-
 type nodeSingle struct {
-	Next *nodeSingle
+	Next  *nodeSingle
 	Value int
 }
 
@@ -24,7 +23,7 @@ type ListIterator struct {
 	cursor *nodeSingle
 }
 
-func (li *ListIterator) HasNext() bool{
+func (li *ListIterator) HasNext() bool {
 	return li.cursor != nil
 }
 
@@ -33,28 +32,30 @@ func (li *ListIterator) Next() int {
 	li.cursor = li.cursor.Next
 	return el
 }
+
 // CreateSingleLinkList returns an empty single linked list
-func CreateSingleLinkList() *SingleLinkedList{
+func CreateSingleLinkList() *SingleLinkedList {
 	return &SingleLinkedList{
-		Head:nil,
+		Head: nil,
 		size: 0,
 	}
 }
 
 // GetSize returns number of nodes in the link list
-func (sl *SingleLinkedList) GetSize() int{
+func (sl *SingleLinkedList) GetSize() int {
 	return sl.size
 }
+
 // AddLast appends a node to the end of the list
 func (sl *SingleLinkedList) AddLast(element int) error {
 	node := &nodeSingle{
-		Next: nil,
+		Next:  nil,
 		Value: element,
 	}
 
 	if sl.Head == nil {
 		sl.Head = node
-		sl.size ++
+		sl.size++
 		return nil
 	}
 
@@ -64,25 +65,25 @@ func (sl *SingleLinkedList) AddLast(element int) error {
 	}
 
 	curr.Next = node
-	sl.size ++
+	sl.size++
 	return nil
 }
 
 // AddFirst prepends a node to the head of the list
-func (sl *SingleLinkedList) AddFirst(element int) error{
+func (sl *SingleLinkedList) AddFirst(element int) error {
 	node := &nodeSingle{
-		Next: sl.Head,
+		Next:  sl.Head,
 		Value: element,
 	}
 	sl.Head = node
-	sl.size ++
+	sl.size++
 	return nil
 }
 
 // AddAfter appends a node  with the correct key
 // @params key - value of node to append after
 // @params element - value of new node to be appended
-func (sl *SingleLinkedList) AddAfter(key, element int) error{
+func (sl *SingleLinkedList) AddAfter(key, element int) error {
 	curr := sl.Head
 	for curr != nil && curr.Value != key {
 		curr = curr.Next
@@ -93,18 +94,18 @@ func (sl *SingleLinkedList) AddAfter(key, element int) error{
 	}
 
 	node := &nodeSingle{
-		Next: curr.Next,
+		Next:  curr.Next,
 		Value: element,
 	}
 	curr.Next = node
-	sl.size ++
+	sl.size++
 	return nil
 }
 
 // AddAfter prepends a node  with the correct key
 // @params key - value of node that we will insert in-front of
 // @params element - value of new node to be appended
-func (sl *SingleLinkedList) AddBefore(key, element int) error{
+func (sl *SingleLinkedList) AddBefore(key, element int) error {
 	if sl.Head == nil {
 		return errors.New("key value not in list")
 	}
@@ -113,7 +114,7 @@ func (sl *SingleLinkedList) AddBefore(key, element int) error{
 	prev := sl.Head
 	if sl.Head.Value == key {
 		node := &nodeSingle{
-			Next: curr,
+			Next:  curr,
 			Value: element,
 		}
 		sl.Head = node
@@ -131,17 +132,17 @@ func (sl *SingleLinkedList) AddBefore(key, element int) error{
 	}
 
 	node := &nodeSingle{
-		Next: curr,
+		Next:  curr,
 		Value: element,
 	}
-	
+
 	prev.Next = node
-	sl.size ++
+	sl.size++
 	return nil
 }
 
 // Delete deletes a node. Only delete one node
-func (sl *SingleLinkedList) Delete(key int) error{
+func (sl *SingleLinkedList) Delete(key int) error {
 	// Check head
 	if sl.Head == nil {
 		return errors.New("can not delete key as it does not exists")
@@ -164,7 +165,7 @@ func (sl *SingleLinkedList) Delete(key int) error{
 	}
 
 	prev.Next = curr.Next
-	sl.size --
+	sl.size--
 	return nil
 }
 
@@ -180,5 +181,5 @@ func (sl *SingleLinkedList) Exists(key int) bool {
 
 // Iterator returns an iterrable object
 func (sl *SingleLinkedList) Iterator() *ListIterator {
-	return &ListIterator{cursor:sl.Head}
+	return &ListIterator{cursor: sl.Head}
 }

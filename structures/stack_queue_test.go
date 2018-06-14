@@ -3,22 +3,22 @@ package structures
 import "testing"
 
 // STACK  TESTS -------------------------------------------------------------------
-func TestStackPopAndPush1(t *testing.T){
+func TestStackPopAndPush1(t *testing.T) {
 	s := InitStack()
 	s.Push(1)
 	s.Push(2)
 
-	if thisIs2, _  := s.Pop(); thisIs2 != 2{
+	if thisIs2, _ := s.Pop(); thisIs2 != 2 {
 		t.Errorf("Stack Pop did not work expected 2 got %d\n", thisIs2)
 	}
-	if thisIs1, _  := s.Pop(); thisIs1 != 1{
+	if thisIs1, _ := s.Pop(); thisIs1 != 1 {
 		t.Errorf("Stack Pop did not work expected 1 got %d\n", thisIs1)
 	}
 }
 
-func TestStackPopAndPush2(t *testing.T){
+func TestStackPopAndPush2(t *testing.T) {
 	s := InitStack()
-	_ , err := s.Pop()
+	_, err := s.Pop()
 	if err == nil {
 		t.Errorf("Pop empty stack should return error")
 	}
@@ -42,22 +42,22 @@ func TestStackSize(t *testing.T) {
 }
 
 // QUEUE TEST -------------------------------------------------------------------------
-func TestQueuePopAndPush1(t *testing.T){
+func TestQueuePopAndPush1(t *testing.T) {
 	s := InitQueue()
 	s.Push(1)
 	s.Push(2)
 
-	if thisIs1, _  := s.Pop(); thisIs1 != 1{
+	if thisIs1, _ := s.Pop(); thisIs1 != 1 {
 		t.Errorf("Queue Pop did not work expected 1 got %d\n", thisIs1)
 	}
-	if thisIs2, _  := s.Pop(); thisIs2 != 2{
+	if thisIs2, _ := s.Pop(); thisIs2 != 2 {
 		t.Errorf("Queue Pop did not work expected 2 got %d\n", thisIs2)
 	}
 }
 
-func TestQueuePopAndPush2(t *testing.T){
+func TestQueuePopAndPush2(t *testing.T) {
 	s := InitQueue()
-	_ , err := s.Pop()
+	_, err := s.Pop()
 	if err == nil {
 		t.Errorf("Pop empty queue should return error")
 	}

@@ -17,7 +17,7 @@ func (q *queue) Push(element int) {
 	q.q = append(q.q, element)
 }
 
-func (q *queue) Pop() (int, error){
+func (q *queue) Pop() (int, error) {
 	if len(q.q) == 0 {
 		return 0, errors.New("can not pop empty queue")
 	}
@@ -27,6 +27,6 @@ func (q *queue) Pop() (int, error){
 	return e, nil
 }
 
-func (q *queue) Size() int{
+func (q *queue) Size() int {
 	return len(q.q)
 }
